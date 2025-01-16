@@ -4,5 +4,5 @@ dist
 # Exlude "node_modules" directory
 node_modules
 
-# Exclude compressed pacakges
-rsql-query-builder-*.tgz
+# Exclude compressed packages
+rsql-query-builder-mongodb-*.tgz
