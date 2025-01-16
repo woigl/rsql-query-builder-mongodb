@@ -2,9 +2,12 @@ import { describe, it, expect } from "vitest";
 
 import RSQLBuilderMongoDB from "./RSQLBuilderMongoDB";
 
-describe("RSQLBuilder", () => {
-  it("builds a simple query", () => {
-    const query = new RSQLBuilderMongoDB().regex("name", "Filip").toString();
-    expect(query).toBe('name=regex="Filip"');
+describe("RSQLBuilderMongoDB", () => {
+  it("Test operator Regex ('=regex=')", () => {
+    expect(new RSQLBuilderMongoDB().regex("name", "Filip").toString()).toBe('name=regex="Filip"');
+  });
+
+  it("Test operator Not Regex ('=notregex=')", () => {
+    expect(new RSQLBuilderMongoDB().notRegex("name", "Filip").toString()).toBe('name=notregex="Filip"');
   });
 });
