@@ -1,8 +1,6 @@
-// Reference https://www.npmjs.com/package/rsql-mongodb
+/** @see: Reference https://www.npmjs.com/package/rsql-mongodb */
 
-import { RSQLBuilderBase, RSQLBuilderOptions } from "rsql-query-builder";
-
-// import RSQLBuilderBase, { RSQLBuilderOptions } from './RSQLBuilderBase';
+import { RSQLBuilderBase, RSQLBuilderOptions } from 'rsql-query-builder';
 
 type ComparisonOperator = 'regex' | 'notRegex' | 'exists';
 
@@ -11,16 +9,14 @@ type ComparisonOperator = 'regex' | 'notRegex' | 'exists';
  * @template Selector - The type of the selector. It is used to define the field names and is a list of strings.
  */
 class RSQLBuilderMongoDB<TSelector extends string> extends RSQLBuilderBase<TSelector, ComparisonOperator> {
-    constructor(
-        options: RSQLBuilderOptions<ComparisonOperator> = {
+    constructor() {
+        super({
             customComparisonOperators: {
                 regex: { rsql: '=regex=' },
                 notRegex: { rsql: '=notregex=' },
                 exists: { rsql: '=exists=' }
             }
-        }
-    ) {
-        super(options);
+        });
     }
 
     /** Add a REGEX condition.
