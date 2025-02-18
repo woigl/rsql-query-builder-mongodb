@@ -4,6 +4,13 @@ import { RSQLBuilderBase, RSQLBuilderOptions } from 'rsql-query-builder';
 
 type ComparisonOperator = 'regex' | 'notRegex' | 'exists';
 
+export enum MongoRegexOptions {
+    CASE_INSENSITIVE = 'i', // Ignore case
+    MULTILINE = 'm', // Multiline mode
+    DOTALL = 's', // Dot matches newline
+    EXTENDED = 'x' // Ignore whitespace and allow comments
+}
+
 /** RSQL Query Builder for MongoDB.
  *
  * @template Selector - The type of the selector. It is used to define the selector names and is a list of strings.
@@ -28,8 +35,16 @@ class RSQLBuilderMongoDB<TSelector extends string> extends RSQLBuilderBase<TSele
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/query/regex/
      */
-    public regex(selector: TSelector, regex: string, options?: string): RSQLBuilderMongoDB<TSelector> {
-        super.addComparison(selector, 'regex', regex);
+    public regex(
+        selector: TSelector,
+        regex: string,
+        options?: string | Array<MongoRegexOptions>
+    ): RSQLBuilderMongoDB<TSelector> {
+        if (Array.isArray(options)) {
+            options = options.join('');
+        }
+
+        super.addComparison(selector, 'regex', regex, options);
         return this;
     }
 
@@ -42,8 +57,16 @@ class RSQLBuilderMongoDB<TSelector extends string> extends RSQLBuilderBase<TSele
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/query/regex/
      */
-    public notRegex(selector: TSelector, regex: string, options?: string): RSQLBuilderMongoDB<TSelector> {
-        super.addComparison(selector, 'notRegex', regex);
+    public notRegex(
+        selector: TSelector,
+        regex: string,
+        options?: string | Array<MongoRegexOptions>
+    ): RSQLBuilderMongoDB<TSelector> {
+        if (Array.isArray(options)) {
+            options = options.join('');
+        }
+
+        super.addComparison(selector, 'notRegex', regex, options);
         return this;
     }
 
@@ -56,7 +79,15 @@ class RSQLBuilderMongoDB<TSelector extends string> extends RSQLBuilderBase<TSele
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/query/regex/
      */
-    public like(selector: TSelector, regex: string, options?: string): RSQLBuilderMongoDB<TSelector> {
+    public like(
+        selector: TSelector,
+        regex: string,
+        options?: string | Array<MongoRegexOptions>
+    ): RSQLBuilderMongoDB<TSelector> {
+        if (Array.isArray(options)) {
+            options = options.join('');
+        }
+
         return this.regex(selector, regex, options);
     }
 
@@ -69,7 +100,15 @@ class RSQLBuilderMongoDB<TSelector extends string> extends RSQLBuilderBase<TSele
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/query/regex/
      */
-    public notLike(selector: TSelector, regex: string, options?: string): RSQLBuilderMongoDB<TSelector> {
+    public notLike(
+        selector: TSelector,
+        regex: string,
+        options?: string | Array<MongoRegexOptions>
+    ): RSQLBuilderMongoDB<TSelector> {
+        if (Array.isArray(options)) {
+            options = options.join('');
+        }
+
         return this.notRegex(selector, regex, options);
     }
 
