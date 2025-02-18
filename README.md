@@ -2,10 +2,6 @@
 
 Library for building RSQL query strings for MongoDB in TypeScript and JavaScript.
 
-# rsql-query-builder
-
-Library for building RSQL query strings in TypeScript and JavaScript.
-
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM License][npm-license-image]][npm-url]
 [![Coverage][coveralls-image]][coveralls-url]
