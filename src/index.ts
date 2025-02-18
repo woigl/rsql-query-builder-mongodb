@@ -1,1 +1,1 @@
-export {default as RSQLBuilderMongoDB} from './RSQLBuilderMongoDB';
+export { default as RSQLBuilderMongoDB, MongoRegexOptions } from './RSQLBuilderMongoDB';
