@@ -15,7 +15,7 @@ export enum MongoRegexOptions {
  *
  * @template Selector - The type of the selector. It is used to define the selector names and is a list of strings.
  */
-class RSQLBuilderMongoDB<TSelector extends string> extends RSQLBuilderBase<TSelector, ComparisonOperator> {
+class RSQLBuilderMongoDB<TSelector extends string = string> extends RSQLBuilderBase<TSelector, ComparisonOperator> {
     constructor() {
         super({
             customComparisonOperators: {
